@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "game-database.h"
+#include "system.h"
 
 #define TAMANHO 2
 
@@ -10,6 +11,13 @@ int main()
 {
     Jogo *jogos = malloc(sizeof(Jogo)*TAMANHO);
 
+    int escolha;
+
+    print_painel();
+    scanf("%d", &escolha);
+    scanf("%c");
+
+    limpar_console();
 
     for (int i=0;i<TAMANHO;i++) {
         printf("\nJOGO %d ----------------\n", i+1);

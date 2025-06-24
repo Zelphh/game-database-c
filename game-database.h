@@ -5,6 +5,7 @@
 
 typedef struct
 {
+    int id;
     char nome[50];
     char data_lancamento[10]; // dd/mm/yyyy
     int idade_minima;
