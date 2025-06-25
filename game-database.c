@@ -5,12 +5,10 @@
 #include "game-database.h"
 #include "system.h"
 
-#define TAMANHO 2
-
 int main()
 {
-    Jogo *jogos = malloc(sizeof(Jogo)*TAMANHO);
-
+    int totoal_jogos = 0;
+    Jogo *jogos = malloc(sizeof(Jogo)*totoal_jogos);
     int escolha;
 
     print_painel();
@@ -19,27 +17,9 @@ int main()
 
     limpar_console();
 
-    for (int i=0;i<TAMANHO;i++) {
-        printf("\nJOGO %d ----------------\n", i+1);
+    adicionar_jogo(&jogos, &totoal_jogos);
 
-        printf("NOME DO JOGO: ");
-        fgets(jogos[i].nome, 50, stdin);
-
-        printf("DATA DE LANCAMENTO [dd/mm/yyyy]: ");
-        scanf("%s", jogos[i].data_lancamento);
-
-        printf("IDADE MINIMA: ");
-        scanf("%d", &jogos[i].idade_minima);
-
-        printf("NOTA: ");
-        scanf("%f", &jogos[i].nota);
-
-        printf("HORAS PARA ZERAR: ");
-        scanf("%f", &jogos[i].horas_para_zerar);
-        scanf("%c");
-    }
-
-    imprimir_jogos(jogos, TAMANHO);
+    imprimir_jogos(&jogos, totoal_jogos);
 
     free(jogos);
 
