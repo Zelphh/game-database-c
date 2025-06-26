@@ -19,7 +19,13 @@ void print_painel() {
     printf("[2] Incluir Jogo\n");
     printf("[3] Deletar um Jogo\n");
     printf("[4] Editar um jogo\n");
-    printf("[0] Mostrar todos os Jogos\n\n");
+    printf("[5] Mostrar todos os Jogos\n");
+    printf("[0] Sair\n\n");
+}
+
+void limpar_buffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) { }
 }
 
 #endif
