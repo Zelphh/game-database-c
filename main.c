@@ -12,7 +12,7 @@ int main()
     int escolha;
 
     do {
-        print_painel();
+        imprimir_painel();
         scanf("%d", &escolha);
         limpar_buffer();
         
@@ -42,6 +42,10 @@ int main()
                 }
         }
     } while (escolha != 0);
+
+    for (int i = 0; i < total_jogos; i++) {
+        free(jogos[i]);
+    }
 
     free(jogos);
 
