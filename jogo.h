@@ -15,7 +15,7 @@ typedef struct {
 } Jogo;
 
 void adicionar_jogo(Jogo ***jogos, int *quantidade) {
-    **jogos = realloc(jogos, sizeof(Jogo) * (*quantidade + 1));
+    *jogos = realloc(*jogos, sizeof(Jogo *) * (*quantidade + 1));
     
     Jogo *novo_jogo = malloc(sizeof(Jogo));
 
@@ -28,7 +28,6 @@ void adicionar_jogo(Jogo ***jogos, int *quantidade) {
     printf("Data de lancamento: ");
     fgets(novo_jogo->data_lancamento, sizeof(novo_jogo->data_lancamento), stdin);
     novo_jogo->data_lancamento[strcspn(novo_jogo->data_lancamento, "\n")] = 0;
-    limpar_buffer();
 
     printf("Idade minima: ");
     scanf("%d", &novo_jogo->idade_minima);
@@ -45,22 +44,25 @@ void adicionar_jogo(Jogo ***jogos, int *quantidade) {
     (*jogos)[*quantidade] = novo_jogo;
     (*quantidade)++;
 
-    limpar_console();
-
     printf("\n%s incluido com sucesso!", (*jogos)[*quantidade - 1]->nome);
 }
 
-void imprimir_jogos(Jogo ***jogos, int quantidade) {
+void imprimir_jogos(Jogo **jogos, int quantidade) {
     printf("\n--------------------- [Lista de Jogos] ---------------------\n\n");
 
-    for (int i=0;i<quantidade;i++) {
-        printf("\nJOGO %d ----------------\n", (*jogos)[i]->id);
+    if (quantidade == 0) {
+        printf("Nenhum jogo cadastrado!\n");
+    } else {
+        for (int i=0;i<quantidade;i++) {
 
-        printf("Nome: %s\n", (*jogos)[i]->nome);
-        printf("Data de lancamento: %s\n", (*jogos)[i]->data_lancamento);
-        printf("Idade minima para jogar: %d\n", (*jogos)[i]->idade_minima);
-        printf("Sua nota do jogo: %.1f\n", (*jogos)[i]->nota);
-        printf("Quantidade de horas para zerar: %.1f\n", (*jogos)[i]->horas_para_zerar);
+            printf("\n[ JOGO %d ] -------------------------\n", jogos[i]->id);
+
+            printf("Nome: %s\n", jogos[i]->nome);
+            printf("Data de lancamento: %s\n", jogos[i]->data_lancamento);
+            printf("Idade minima para jogar: %d\n", jogos[i]->idade_minima);
+            printf("Sua nota do jogo: %.1f\n", jogos[i]->nota);
+            printf("Quantidade de horas para zerar: %.1f\n", jogos[i]->horas_para_zerar);
+        }
     }
 }
 

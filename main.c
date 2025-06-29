@@ -7,23 +7,22 @@
 
 int main()
 {
-    int totoal_jogos = 0;
-    Jogo **jogos = malloc(sizeof(Jogo)*totoal_jogos);
+    int total_jogos = 0;
+    Jogo **jogos = NULL;
     int escolha;
 
-    while (escolha != 0) {
-
+    do {
         print_painel();
         scanf("%d", &escolha);
         limpar_buffer();
-
+        
         switch (escolha) {
             case 1:
                 //buscar_jogo(&jogos, total_jogos);
                 break;
             case 2:
                 limpar_console();
-                adicionar_jogo(&jogos, &totoal_jogos);
+                adicionar_jogo(&jogos, &total_jogos);
                 break;
             case 3:
                 //deletar_jogo(&jogos, &totoal_jogos);
@@ -33,18 +32,16 @@ int main()
                 break;
             case 5:
                 limpar_console();
-                imprimir_jogos(&jogos, totoal_jogos);
+                imprimir_jogos(jogos, total_jogos);
                 break;
             default:
-                printf("Escolha invalida!");    
-            }
-    }
-
-    limpar_console();
-
-    adicionar_jogo(&jogos, &totoal_jogos);
-
-    imprimir_jogos(&jogos, totoal_jogos);
+                if (escolha == 0) {
+                    printf("\nProgama Encerrado! Volte sempre :D\n");
+                } else {
+                    printf("\nEscolha invalida!");
+                }
+        }
+    } while (escolha != 0);
 
     free(jogos);
 
