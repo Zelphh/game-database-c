@@ -10,7 +10,10 @@ typedef struct {
     float horas_para_zerar;
 } Jogo;
 
+void imprimir_jogo(Jogo *jogo);
+int buscar_jogo(Jogo **jogos, int total_jogos);
 void adicionar_jogo(Jogo ***jogos, int *quantidade);
 void imprimir_jogos(Jogo **jogos, int quantidade);
+
 
 #endif

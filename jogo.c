@@ -5,12 +5,42 @@
 #include "jogo.h"
 #include "system.h"
 
-void adicionar_jogo(Jogo ***jogos, int *quantidade) {
-    *jogos = realloc(*jogos, sizeof(Jogo *) * (*quantidade + 1));
+void imprimir_jogo(Jogo *jogo) {
+    printf("\n[ JOGO %d ] -------------------------\n", jogo->id);
+
+    printf("Nome: %s\n", jogo->nome);
+    printf("Data de lancamento: %s\n", jogo->data_lancamento);
+    printf("Idade minima para jogar: %d\n", jogo->idade_minima);
+    printf("Sua nota do jogo: %.1f\n", jogo->nota);
+    printf("Quantidade de horas para zerar: %.1f\n", jogo->horas_para_zerar); 
+}
+
+int buscar_jogo(Jogo **jogos, int total_jogos) {
+    int id;
+    
+    printf("Informe o ID jo jogo a pesquisar: ");
+    scanf("%d", &id);
+    limpar_buffer();
+
+    if (total_jogos == 0) {
+            printf("Nenhum jogo cadastrado!");
+        } else {
+            for (int i = 0; i < total_jogos; i++) {
+                if (jogos[i]->id == id) {
+                    imprimir_jogo(jogos[i]);
+                    return 0;
+                }
+            }
+            return 1;
+        }
+}
+
+void adicionar_jogo(Jogo ***jogos, int *total_jogos) {
+    *jogos = realloc(*jogos, sizeof(Jogo *) * (*total_jogos + 1));
     
     Jogo *novo_jogo = malloc(sizeof(Jogo));
 
-    novo_jogo->id = *quantidade + 1;
+    novo_jogo->id = *total_jogos + 1;
 
     printf("Nome: ");
     fgets(novo_jogo->nome, sizeof(novo_jogo->nome), stdin);
@@ -29,31 +59,24 @@ void adicionar_jogo(Jogo ***jogos, int *quantidade) {
     scanf("%f", &novo_jogo->nota);
     limpar_buffer();
     
-    printf("Quantidade de horas para zerar: ");
+    printf("Quantiadade de horas para zerar: ");
     scanf("%f", &novo_jogo->horas_para_zerar);
     limpar_buffer();
 
-    (*jogos)[*quantidade] = novo_jogo;
-    (*quantidade)++;
+    (*jogos)[*total_jogos] = novo_jogo;
+    (*total_jogos)++;
 
-    printf("\n%s incluido com sucesso!", (*jogos)[*quantidade - 1]->nome);
+    printf("\n%s incluido com sucesso!", (*jogos)[*total_jogos - 1]->nome);
 }
 
-void imprimir_jogos(Jogo **jogos, int quantidade) {
+void imprimir_jogos(Jogo **jogos, int total_jogos) {
     printf("\n--------------------- [Lista de Jogos] ---------------------\n\n");
 
-    if (quantidade == 0) {
+    if (total_jogos == 0) {
         printf("Nenhum jogo cadastrado!\n");
     } else {
-        for (int i=0;i<quantidade;i++) {
-
-            printf("\n[ JOGO %d ] -------------------------\n", jogos[i]->id);
-
-            printf("Nome: %s\n", jogos[i]->nome);
-            printf("Data de lancamento: %s\n", jogos[i]->data_lancamento);
-            printf("Idade minima para jogar: %d\n", jogos[i]->idade_minima);
-            printf("Sua nota do jogo: %.1f\n", jogos[i]->nota);
-            printf("Quantidade de horas para zerar: %.1f\n", jogos[i]->horas_para_zerar);
+        for (int i=0;i<total_jogos;i++) {
+            imprimir_jogo(jogos[i]);
         }
     }
 }

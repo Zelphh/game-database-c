@@ -1,1 +1,1 @@
-gcc main.c jogo.c system.c -o meu_programa
+gcc main.c jogo.c system.c -o main

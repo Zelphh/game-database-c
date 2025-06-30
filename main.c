@@ -18,7 +18,10 @@ int main()
         
         switch (escolha) {
             case 1:
-                //buscar_jogo(&jogos, total_jogos);
+                limpar_console();
+                if (buscar_jogo(jogos, total_jogos) == 1) {
+                    printf("Jogo com esse ID não encontrado!");
+                }
                 break;
             case 2:
                 limpar_console();
