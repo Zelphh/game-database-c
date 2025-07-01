@@ -18,7 +18,7 @@ void imprimir_jogo(Jogo *jogo) {
 int buscar_jogo(Jogo **jogos, int total_jogos) {
     int id;
     
-    printf("Informe o ID jo jogo a pesquisar: ");
+    printf("Informe o ID do jogo a pesquisar: ");
     scanf("%d", &id);
     limpar_buffer();
 
@@ -35,12 +35,12 @@ int buscar_jogo(Jogo **jogos, int total_jogos) {
         }
 }
 
-void adicionar_jogo(Jogo ***jogos, int *total_jogos) {
+void adicionar_jogo(Jogo ***jogos, int *total_jogos, int *count_id) {
     *jogos = realloc(*jogos, sizeof(Jogo *) * (*total_jogos + 1));
     
     Jogo *novo_jogo = malloc(sizeof(Jogo));
 
-    novo_jogo->id = *total_jogos + 1;
+    novo_jogo->id = *count_id + 1;
 
     printf("Nome: ");
     fgets(novo_jogo->nome, sizeof(novo_jogo->nome), stdin);
@@ -65,8 +65,32 @@ void adicionar_jogo(Jogo ***jogos, int *total_jogos) {
 
     (*jogos)[*total_jogos] = novo_jogo;
     (*total_jogos)++;
+    (*count_id)++;
 
-    printf("\n%s incluido com sucesso!", (*jogos)[*total_jogos - 1]->nome);
+    printf("\n%s incluido com sucesso! [ID: %d]", (*jogos)[*total_jogos - 1]->nome, (*jogos)[*total_jogos - 1]->id);
+}
+
+void deletar_jogo(Jogo ***jogos, int *total_jogos) {
+    int id;
+    
+    printf("Informe o ID do jogo a ser deletado: ");
+    scanf("%d", &id);
+    limpar_buffer();
+
+    for (int i = 0; i < *total_jogos; i++) {
+        if ((*jogos)[i]->id == id) {
+            free((*jogos)[i]);
+            for (int j = i; j < *total_jogos;j++) {
+                (*jogos)[i] = (*jogos)[i+1];
+            }
+
+            (*total_jogos)--;
+
+            *jogos = realloc(*jogos, sizeof(Jogo *) * (*total_jogos));
+
+            printf("Jogo [Id: %d] deletado com sucesso!", id);
+        }
+    }
 }
 
 void imprimir_jogos(Jogo **jogos, int total_jogos) {

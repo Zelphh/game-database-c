@@ -8,6 +8,7 @@
 int main()
 {
     int total_jogos = 0;
+    int count_id = 0;
     Jogo **jogos = NULL;
     int escolha;
 
@@ -19,16 +20,16 @@ int main()
         switch (escolha) {
             case 1:
                 limpar_console();
-                if (buscar_jogo(jogos, total_jogos) == 1) {
+                if (buscar_jogo(jogos, total_jogos) == 1)
                     printf("Jogo com esse ID não encontrado!");
-                }
                 break;
             case 2:
                 limpar_console();
-                adicionar_jogo(&jogos, &total_jogos);
+                adicionar_jogo(&jogos, &total_jogos, &count_id);
                 break;
             case 3:
-                //deletar_jogo(&jogos, &totoal_jogos);
+                limpar_console();
+                deletar_jogo(&jogos, &total_jogos);
                 break;
             case 4:
                 //editar_jogo(&jogos, total_jogos);
