@@ -11,6 +11,9 @@ int main()
     int count_id = 0;
     Jogo **jogos = NULL;
     int escolha;
+    const char *NOME_ARQUIVO = "jogos.csv";
+
+    carregar_jogos_csv(&jogos, &total_jogos, &count_id, NOME_ARQUIVO);
 
     do {
         imprimir_painel();
@@ -41,7 +44,8 @@ int main()
                 break;
             default:
                 if (escolha == 0) {
-                    printf("\nProgama Encerrado! Volte sempre :D\n");
+                    salvar_jogos_csv(jogos, total_jogos, NOME_ARQUIVO);
+                    printf("\nPrograma Encerrado! Volte sempre :D\n");
                 } else {
                     printf("\nEscolha invalida!");
                 }

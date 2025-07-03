@@ -141,3 +141,73 @@ void imprimir_jogos(Jogo **jogos, int total_jogos) {
         }
     }
 }
+
+void carregar_jogos_csv(Jogo ***jogos, int *total_jogos, int *count_id, const char *filename) {
+    FILE *arquivo = fopen(filename, "r");
+    if (arquivo == NULL) {
+        printf("Arquivo de banco de dados (%s) nao encontrado. Um novo sera criado ao salvar.\n", filename);
+        return;
+    }
+
+    int max_id = 0;
+    char buffer[256];
+
+    while (fgets(buffer, sizeof(buffer), arquivo) != NULL) {
+        Jogo *novo_jogo = malloc(sizeof(Jogo));
+        if (novo_jogo == NULL) {
+            perror("Falha ao alocar memoria para carregar jogo");
+            continue;
+        }
+
+        int itens_lidos = sscanf(buffer, "%d,%49[^,],%9[^,],%d,%f,%f", 
+               &novo_jogo->id, 
+               novo_jogo->nome, 
+               novo_jogo->data_lancamento, 
+               &novo_jogo->idade_minima,
+               &novo_jogo->nota, 
+               &novo_jogo->horas_para_zerar);
+
+        if (itens_lidos == 6) {
+            *jogos = realloc(*jogos, sizeof(Jogo *) * (*total_jogos + 1));
+            if (*jogos == NULL) {
+                perror("Falha ao realocar memoria para o array de jogos");
+                free(novo_jogo);
+                break; 
+            }
+            
+            (*jogos)[*total_jogos] = novo_jogo;
+            (*total_jogos)++;
+
+            if (novo_jogo->id > max_id) {
+                max_id = novo_jogo->id;
+            }
+        } else {
+            free(novo_jogo);
+        }
+    }
+
+    *count_id = max_id;
+    fclose(arquivo);
+    printf("Total de %d jogo(s) carregado(s) do arquivo %s.", *total_jogos, filename);
+}
+
+void salvar_jogos_csv(Jogo **jogos, int total_jogos, const char *filename) {
+    FILE *arquivo = fopen(filename, "w"); 
+    if (arquivo == NULL) {
+        perror("Nao foi possivel abrir o arquivo para salvar");
+        return;
+    }
+
+    for (int i = 0; i < total_jogos; i++) {
+        fprintf(arquivo, "%d,%s,%s,%d,%.1f,%.1f\n",
+                jogos[i]->id,
+                jogos[i]->nome,
+                jogos[i]->data_lancamento,
+                jogos[i]->idade_minima,
+                jogos[i]->nota,
+                jogos[i]->horas_para_zerar);
+    }
+
+    fclose(arquivo);
+    printf("\nJogos salvos com sucesso no arquivo %s!", filename);
+}
