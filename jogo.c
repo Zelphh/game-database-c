@@ -93,6 +93,43 @@ void deletar_jogo(Jogo ***jogos, int *total_jogos) {
     }
 }
 
+void editar_jogo(Jogo ***jogos, int total_jogos) {
+    int id;
+    
+    printf("Informe o ID do jogo a ser editado: ");
+    scanf("%d", &id);
+    limpar_buffer();
+
+    for (int i = 0; i < total_jogos; i++) {
+        if ((*jogos)[i]->id == id) {
+            printf("Nome: ");
+            fgets((*jogos)[i]->nome, sizeof((*jogos)[i]->nome), stdin);
+            (*jogos)[i]->nome[strcspn((*jogos)[i]->nome, "\n")] = 0;
+
+            printf("Data de lancamento: ");
+            fgets((*jogos)[i]->data_lancamento, sizeof((*jogos)[i]->data_lancamento), stdin);
+            (*jogos)[i]->data_lancamento[strcspn((*jogos)[i]->data_lancamento, "\n")] = 0;
+            limpar_buffer();
+
+            printf("Idade minima: ");
+            scanf("%d", &(*jogos)[i]->idade_minima);
+            limpar_buffer();
+
+            printf("Nota [1 a 10]: ");
+            scanf("%f", &(*jogos)[i]->nota);
+            limpar_buffer();
+            
+            printf("Quantiadade de horas para zerar: ");
+            scanf("%f", &(*jogos)[i]->horas_para_zerar);
+            limpar_buffer();
+
+            limpar_console();
+
+            printf("\nJogo [Id: %d] editado com sucesso!\n", id);
+        }
+    }
+}
+
 void imprimir_jogos(Jogo **jogos, int total_jogos) {
     printf("\n--------------------- [Lista de Jogos] ---------------------\n\n");
 

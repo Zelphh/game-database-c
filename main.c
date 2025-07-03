@@ -32,7 +32,8 @@ int main()
                 deletar_jogo(&jogos, &total_jogos);
                 break;
             case 4:
-                //editar_jogo(&jogos, total_jogos);
+                limpar_console();
+                editar_jogo(&jogos, total_jogos);
                 break;
             case 5:
                 limpar_console();

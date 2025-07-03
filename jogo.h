@@ -12,9 +12,10 @@ typedef struct {
 
 void imprimir_jogo(Jogo *jogo);
 int buscar_jogo(Jogo **jogos, int total_jogos);
-void adicionar_jogo(Jogo ***jogos, int *quantidade, int *count_id);
-void deletar_jogo(Jogo ***jogos, int *quantidade);
-void imprimir_jogos(Jogo **jogos, int quantidade);
+void adicionar_jogo(Jogo ***jogos, int *total_jogos, int *count_id);
+void deletar_jogo(Jogo ***jogos, int *total_jogos);
+void editar_jogo(Jogo ***jogos, int total_jogos);
+void imprimir_jogos(Jogo **jogos, int total_jogos);
 
 
 #endif
