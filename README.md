@@ -1,8 +1,11 @@
 
 PROJETO: games_database
- AUTOR: Matheus Melle Tártari
- DISCIPLINA: Linguagem de Programação [LPG002]
- PROFESSORA: Marisangila Alves
+
+AUTOR: Matheus Melle Tártari
+
+DISCIPLINA: Linguagem de Programação [LPG002]
+
+PROFESSORA: Marisangila Alves
 
 ---
 
@@ -23,12 +26,16 @@ Os dados são armazenados de forma persistente em um arquivo de texto formatado 
 
 A pasta raiz do projeto deve conter os seguintes arquivos para que a compilação e execução ocorram corretamente:
 
-.
 ├── main.c              # Arquivo principal, contém a função main() e o menu de navegação.
+
 ├── jogo.h              # Arquivo de cabeçalho com a definição da struct 'Jogo' e os protótipos das funções.
+
 ├── jogo.c              # Implementação das funções de manipulação dos jogos (adicionar, buscar, etc.).
+
 ├── system.h            # Cabeçalho para funções auxiliares do sistema.
+
 ├── system.c            # Implementação das funções auxiliares (limpar console, limpar buffer).
+
 └── jogos.csv           # (Opcional) Arquivo de banco de dados. Será criado automaticamente na primeira execução se não existir.
 
 -----------------------------------------------------
